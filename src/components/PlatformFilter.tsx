@@ -22,21 +22,39 @@ export function PlatformFilter({
             key={p}
             type="button"
             onClick={() => onChange(p)}
-            className={`px-4 py-2 border rounded ${
-              selected === p ? "bg-gray-800 text-white" : "bg-white text-gray-800"
-            }`}
+            className={`px-5 py-2.5 rounded-full font-medium cursor-pointer transition-all duration-200 ${
+  selected === p
+    ? "bg-indigo-600 text-white shadow-lg"
+    : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+}`}
           >
             {getPlatformLabel(p)}
           </button>
         ))}
       </div>
+      <div className="flex justify-center mt-6">
       <input
         type="text"
         value={searchQuery}
         onChange={(e) => onSearchChange(e.target.value)}
         placeholder="Search by username or name..."
-        className="w-full max-w-md border px-3 py-2 rounded"
+        className="
+w-full
+max-w-xl
+bg-slate-900
+border
+border-slate-700
+px-4
+py-3
+rounded-xl
+text-slate-100
+placeholder:text-slate-500
+focus:outline-none
+focus:ring-2
+focus:ring-indigo-500
+"
       />
+      </div>
     </div>
   );
 }

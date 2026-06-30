@@ -76,6 +76,7 @@ export function ProfileDetailPage() {
 
   return (
     <Layout title={user.fullname}>
+      <div className="max-w-4xl mx-auto">
       <Link to="/" className="text-sm text-blue-600 mb-4 inline-block">
         ← Back to search
       </Link>
@@ -169,6 +170,7 @@ export function ProfileDetailPage() {
             Add to List
           </button>
         </div>
+      </div>
       </div>
     </Layout>
   );
