@@ -22,11 +22,33 @@ export function filterProfiles(
   profiles: UserProfileSummary[],
   query: string
 ): UserProfileSummary[] {
-  if (!query) return profiles;
+  if (!query.trim()) return profiles;
+
+  const normalizedQuery = query.toLowerCase();
+
   return profiles.filter((p) => {
-    const matchUsername = p.username.includes(query);
-    const matchFullname = p.fullname.toLowerCase().includes(query.toLowerCase());
-    return matchUsername || matchFullname;
+    const matchUsername = p.username
+      ?.toLowerCase()
+      .includes(normalizedQuery);
+
+    const matchFullname = p.fullname
+      .toLowerCase()
+      .includes(normalizedQuery);
+
+    const matchHandle = p.handle
+      ?.toLowerCase()
+      .includes(normalizedQuery);
+
+    const matchCustomName = p.custom_name
+      ?.toLowerCase()
+      .includes(normalizedQuery);
+
+    return (
+      matchUsername ||
+      matchFullname ||
+      matchHandle ||
+      matchCustomName
+    );
   });
 }
 

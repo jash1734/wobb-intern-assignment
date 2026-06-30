@@ -22,13 +22,15 @@ export function ProfileDetailPage() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    if (!username) return;
+  if (!username) return;
 
-    loadProfileByUsername(username).then((data) => {
-      setProfileData(data);
-      setLoaded(true);
-    });
-  }, [username]);
+  setLoaded(false);
+
+  loadProfileByUsername(username).then((data) => {
+    setProfileData(data);
+    setLoaded(true);
+  });
+}, [username]);
 
   if (!username) {
     return (
@@ -47,18 +49,28 @@ export function ProfileDetailPage() {
     );
   }
 
-  if (!profileData) {
-    return (
-      <Layout title={`@${username}`}>
-        <p className="text-red-600 mb-4">
-          Could not load profile details for {username}
+ if (!profileData) {
+  return (
+    <Layout title={`@${username}`}>
+      <div className="max-w-md mx-auto text-center py-12">
+        <h2 className="text-2xl font-semibold mb-3">
+          Profile details unavailable
+        </h2>
+
+        <p className="text-gray-500 mb-6">
+          Detailed analytics for @{username} are not available yet.
         </p>
-        <Link to="/" className="text-blue-600 underline">
-          Back to search
+
+        <Link
+          to="/"
+          className="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+        >
+          Back to Search
         </Link>
-      </Layout>
-    );
-  }
+      </div>
+    </Layout>
+  );
+}
 
   const user: FullUserProfile = profileData.data.user_profile;
 
