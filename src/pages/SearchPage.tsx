@@ -4,6 +4,7 @@ import { Layout } from "@/components/Layout";
 import { PlatformFilter } from "@/components/PlatformFilter";
 import { ProfileList } from "@/components/ProfileList";
 import { extractProfiles, filterProfiles } from "@/utils/dataHelpers";
+import { SelectedProfiles } from "@/components/SelectedProfiles";
 
 export function SearchPage() {
   const [platform, setPlatform] = useState<Platform>("instagram");
@@ -24,7 +25,7 @@ export function SearchPage() {
       <p className="text-slate-400 text-lg mb-10 text-center">
         Browse top creators across social platforms
       </p>
-
+      <SelectedProfiles />
       <PlatformFilter
         selected={platform}
         onChange={(p) => {
@@ -38,7 +39,7 @@ export function SearchPage() {
       <p className="text-xs text-gray-400 mb-2 mt-6">
         Showing {filtered.length} of {allProfiles.length} on {platform}
       </p>
-
+      
       <ProfileList
         profiles={filtered}
         platform={platform}

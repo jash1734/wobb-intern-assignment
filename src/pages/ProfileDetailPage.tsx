@@ -5,6 +5,7 @@ import { VerifiedBadge } from "@/components/VerifiedBadge";
 import type { FullUserProfile, ProfileDetailResponse } from "@/types";
 import { formatEngagementRate } from "@/utils/formatters";
 import { loadProfileByUsername } from "@/utils/profileLoader";
+import { useSelectedProfilesStore } from "@/store/useSelectedProfilesStore";
 
 function formatFollowersDetail(count: number) {
   if (count >= 1000000) return (count / 1000000).toFixed(2) + "M";
@@ -20,6 +21,13 @@ export function ProfileDetailPage() {
     null
   );
   const [loaded, setLoaded] = useState(false);
+  const addProfile = useSelectedProfilesStore(
+  (state) => state.addProfile
+);
+
+const selectedProfiles = useSelectedProfilesStore(
+  (state) => state.selectedProfiles
+);
 
   useEffect(() => {
   if (!username) return;
@@ -73,6 +81,9 @@ export function ProfileDetailPage() {
 }
 
   const user: FullUserProfile = profileData.data.user_profile;
+  const isSelected = selectedProfiles.some(
+  (profile) => profile.user_id === user.user_id
+);
 
   return (
     <Layout title={user.fullname}>
@@ -161,14 +172,17 @@ export function ProfileDetailPage() {
             </a>
           )}
 
-          {/* TODO: candidates must implement Add to List feature */}
-          {/* TODO: candidates must implement Add to List feature */}
-          <button
-            disabled
-            className="block mt-4 px-4 py-2 bg-gray-300 text-gray-500 rounded cursor-not-allowed"
-          >
-            Add to List
-          </button>
+         <button
+  onClick={() => addProfile(user)}
+  disabled={isSelected}
+  className={`block mt-4 px-4 py-2 rounded transition ${
+    isSelected
+      ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+      : "bg-indigo-600 text-white hover:bg-indigo-700"
+  }`}
+>
+  {isSelected ? "Added" : "Add to List"}
+</button>
         </div>
       </div>
       </div>

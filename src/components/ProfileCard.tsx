@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import type { Platform, UserProfileSummary } from "@/types";
 import { VerifiedBadge } from "./VerifiedBadge";
+import { useSelectedProfilesStore } from "@/store/useSelectedProfilesStore";
 
 interface ProfileCardProps {
   profile: UserProfileSummary;
@@ -22,8 +23,21 @@ export function ProfileCard({
   onProfileClick,
 }: ProfileCardProps) {
   const navigate = useNavigate();
+  const addProfile = useSelectedProfilesStore(
+  (state) => state.addProfile
+);
+
+const selectedProfiles = useSelectedProfilesStore(
+  (state) => state.selectedProfiles
+);
+
+const isSelected = selectedProfiles.some(
+  (p) => p.user_id === profile.user_id
+);
 
   const handleClick = () => {
+    if (!profile.username) return;
+
     if (onProfileClick) onProfileClick(profile.username);
     navigate(`/profile/${profile.username}?platform=${platform}`);
   };
@@ -60,23 +74,21 @@ cursor-pointer
         <div className="text-sm text-slate-400">{profile.fullname}</div>
         <div className="text-sm text-slate-300 mt-1">{formatFollowersLocal(profile.followers)}</div>
       </div>
-      {/* TODO: candidates must implement Add to List feature */}
-      {/* TODO: candidates must implement Add to List feature */}
+      
       <button
-        disabled
-        className="
-px-4
-py-2
-rounded-lg
-bg-slate-800
-text-slate-500
-cursor-not-allowed
-border
-border-slate-700
-"
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e) => {
+        e.stopPropagation();
+
+        addProfile(profile);
+    }}
+    disabled={isSelected}
+       className={`px-4 py-2 rounded-lg border transition ${
+  isSelected
+    ? "bg-slate-800 text-slate-500 cursor-not-allowed border-slate-700"
+    : "bg-indigo-600 text-white hover:bg-indigo-700 border-indigo-600"
+}`}
       >
-        Add to List
+        {isSelected ? "Added" : "Add to List"}
       </button>
     </div>
   );
