@@ -8,12 +8,15 @@ interface LayoutProps {
 
 export function Layout({ children, title }: LayoutProps) {
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-neutral-950 text-neutral-100">
 
-      <main className="max-w-7xl mx-auto px-6 py-12">
+      <main className="max-w-7xl mx-auto px-6 py-16">
         {title && (
-          <div className="text-center mb-4">
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight">
+          <div className="text-center mb-10">
+            <p className="text-xs font-semibold tracking-[0.2em] text-amber-500 uppercase mb-3">
+              Creator directory
+            </p>
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-neutral-50">
               {title}
             </h1>
           </div>

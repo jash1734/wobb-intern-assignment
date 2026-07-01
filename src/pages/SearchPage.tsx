@@ -32,7 +32,7 @@ const handlePlatformChange = useCallback(
   return (
     <Layout title="Find Influencers">
       <div className="max-w-5xl mx-auto">
-      <p className="text-slate-400 text-lg mb-10 text-center">
+      <p className="text-neutral-400 text-lg mb-10 text-center">
         Browse top creators across social platforms
       </p>
       <SelectedProfiles />
@@ -43,7 +43,7 @@ const handlePlatformChange = useCallback(
         onSearchChange={setSearchQuery}
       />
 
-      <p className="text-xs text-gray-400 mb-2 mt-6">
+      <p className="text-xs text-neutral-500 mb-4 mt-6">
         Showing {filtered.length} of {allProfiles.length} on {platform}
       </p>
       

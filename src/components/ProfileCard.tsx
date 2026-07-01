@@ -16,6 +16,12 @@ function formatFollowersLocal(count: number) {
   return count + " followers";
 }
 
+const platformRingColor: Record<Platform, string> = {
+  instagram: "ring-rose-500",
+  youtube: "ring-red-500",
+  tiktok: "ring-teal-400",
+};
+
 export function ProfileCard({
   profile,
   platform,
@@ -50,29 +56,30 @@ flex
 items-center
 gap-4
 p-5
-mb-4
 w-full
-rounded-2xl
+rounded-xl
 border
-border-slate-800
-bg-slate-900
-hover:-translate-y-1
-hover:border-indigo-500/50
-hover:shadow-2xl
-transition-all
-duration-300
+border-neutral-800
+bg-neutral-900
+hover:border-neutral-700
+hover:bg-neutral-800/60
+transition-colors
+duration-150
 cursor-pointer
 "
       data-search={searchQuery}
     >
-      <img src={profile.picture} className="w-16 h-16 rounded-full object-cover" />
-      <div className="text-left flex-1">
-        <div className="font-semibold text-lg text-white">
+      <img
+        src={profile.picture}
+        className={`w-14 h-14 rounded-full object-cover ring-2 ring-offset-2 ring-offset-neutral-900 ${platformRingColor[platform]}`}
+      />
+      <div className="text-left flex-1 min-w-0">
+        <div className="font-semibold text-neutral-50 truncate">
           @{profile.username}
           <VerifiedBadge verified={profile.is_verified} />
         </div>
-        <div className="text-sm text-slate-400">{profile.fullname}</div>
-        <div className="text-sm text-slate-300 mt-1">{formatFollowersLocal(profile.followers)}</div>
+        <div className="text-sm text-neutral-400 truncate">{profile.fullname}</div>
+        <div className="text-sm text-neutral-300 mt-1 font-mono tabular-nums">{formatFollowersLocal(profile.followers)}</div>
       </div>
       
       <button
@@ -82,10 +89,10 @@ cursor-pointer
         addProfile(profile);
     }}
     disabled={isSelected}
-       className={`px-4 py-2 rounded-lg border transition ${
+       className={`shrink-0 px-4 py-2 text-sm rounded-lg border transition-colors ${
   isSelected
-    ? "bg-slate-800 text-slate-500 cursor-not-allowed border-slate-700"
-    : "bg-indigo-600 text-white hover:bg-indigo-700 border-indigo-600"
+    ? "bg-neutral-800 text-neutral-500 cursor-not-allowed border-neutral-800"
+    : "bg-amber-500 text-neutral-950 hover:bg-amber-400 border-amber-500 font-medium"
 }`}
       >
         {isSelected ? "Added" : "Add to List"}

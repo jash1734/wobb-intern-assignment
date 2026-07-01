@@ -13,9 +13,9 @@ interface PlatformFilterProps {
 }
 
 const platformIcons = {
-  instagram: <FaInstagram size={18} />,
-  youtube: <FaYoutube size={18} />,
-  tiktok: <FaTiktok size={18} />,
+  instagram: <FaInstagram size={16} />,
+  youtube: <FaYoutube size={16} />,
+  tiktok: <FaTiktok size={16} />,
 };
 
 export function PlatformFilter({
@@ -26,16 +26,16 @@ export function PlatformFilter({
 }: PlatformFilterProps) {
   return (
     <div className="mb-4">
-      <div className="flex gap-2 justify-center mb-3">
+      <div className="flex gap-2 justify-center mb-6">
         {PLATFORMS.map((p) => (
           <button
             key={p}
             type="button"
             onClick={() => onChange(p)}
-            className={`px-5 py-2.5 rounded-full font-medium cursor-pointer transition-all duration-200 ${
+            className={`px-5 py-2.5 rounded-full text-sm font-medium cursor-pointer transition-colors duration-150 border ${
   selected === p
-    ? "bg-indigo-600 text-white shadow-lg"
-    : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+    ? "bg-amber-500 text-neutral-950 border-amber-500"
+    : "bg-transparent text-neutral-400 border-neutral-800 hover:border-neutral-600 hover:text-neutral-200"
 }`}
           >
             <label className="flex items-center gap-2 cursor-pointer">
@@ -45,7 +45,7 @@ export function PlatformFilter({
           </button>
         ))}
       </div>
-      <div className="flex justify-center mt-6">
+      <div className="flex justify-center">
       <input
         type="text"
         value={searchQuery}
@@ -54,17 +54,19 @@ export function PlatformFilter({
         className="
 w-full
 max-w-xl
-bg-slate-900
+bg-neutral-900
 border
-border-slate-700
+border-neutral-800
 px-4
 py-3
-rounded-xl
-text-slate-100
-placeholder:text-slate-500
+rounded-lg
+text-neutral-100
+placeholder:text-neutral-500
 focus:outline-none
-focus:ring-2
-focus:ring-indigo-500
+focus:ring-1
+focus:ring-amber-500
+focus:border-amber-500
+transition-colors
 "
       />
       </div>

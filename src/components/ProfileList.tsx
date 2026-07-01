@@ -14,8 +14,10 @@ export function ProfileList({
   searchQuery,
 }: ProfileListProps) {
   return (
-    <div className="flex flex-col items-center">
-      {profiles.length === 0 && <p>No profiles found</p>}
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {profiles.length === 0 && (
+        <p className="col-span-full text-center text-neutral-500 py-12">No profiles found</p>
+      )}
       {profiles.map((profile) => (
         <ProfileCard
           key={profile.user_id}
