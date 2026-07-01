@@ -1,80 +1,208 @@
-# Wobb Frontend Assignment
+# Influencer Search Assignment
 
-A starter influencer search application built with **React**, **TypeScript**, **Vite**, and **Tailwind CSS**. This project is intentionally left in a rough-but-working state for candidates to improve.
+A modern influencer discovery platform built with React, TypeScript, Vite, Tailwind CSS, and Zustand.
+
+The application allows users to browse influencers across Instagram, YouTube, and TikTok, view profile details, and maintain a persistent list of selected creators.
+
+## Live Demo
+
+
+```text
+https://creatordirectory.vercel.app/
+```
+
+---
+
+## Tech Stack
+
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Router DOM
+- Zustand
+- React Icons
+
+---
+
+## Features
+
+### Search & Discovery
+
+- Browse creators across Instagram, YouTube, and TikTok
+- Search by username, handle, or full name
+- Case-insensitive search
+- Responsive filtering by platform
+
+### Profile Details
+
+- Dedicated profile detail pages
+- External links to original social platforms
+- Graceful handling for unavailable profile details
+- Improved loading and error states
+
+### Selected Profiles
+
+- Add creators to a selected list
+- Duplicate prevention
+- Remove creators from the list
+- Persistent state using localStorage
+- Shared state management with Zustand
+
+### UI Improvements
+
+- Redesigned modern dark theme
+- Improved visual hierarchy
+- Better spacing and responsiveness
+- Improved empty states and interactions
+- Platform icons using React Icons
+
+---
+
+## Changes Made
+
+### Bug Fixes
+
+- Fixed YouTube search issues caused by missing username fields
+- Improved handling for profiles without detail JSON files
+- Fixed TypeScript deprecation warnings
+- Removed unused dependencies
+- Improved search behavior across different data formats
+
+### UI/UX Improvements
+
+- Redesigned the application with a modern dark theme
+- Improved cards, buttons, search inputs, and layouts
+- Added responsive improvements
+- Enhanced loading and empty states
+- Improved overall user experience
+
+### State Management
+
+- Added Zustand for global state management
+- Implemented persistent selected profiles using localStorage
+- Replaced the incomplete Add to List implementation
+
+### Performance Improvements
+
+- Reduced unnecessary renders using React best practices
+- Improved component organization and code reuse
+- Optimized filtering logic
+- Removed unused code and dependencies
+
+---
+
+## Libraries Added
+
+### Zustand
+
+Used for:
+
+- Global state management
+- Persistent selected profiles
+- Duplicate prevention
+- Cross-page state sharing
+
+### React Icons
+
+Used to improve the platform filter UI and overall visual consistency.
+
+---
+
+## Assumptions Made
+
+- Some creators intentionally do not have detailed profile JSON files.
+- Missing profile details are handled gracefully instead of generating artificial data.
+- Selected profiles should persist using browser localStorage.
+- The Add to List functionality should be shared across all pages using global state.
+
+---
+
+## Trade-offs
+
+- Zustand was chosen instead of more complex state management solutions because the application requirements are relatively lightweight.
+- Kept animations minimal to prioritize performance and maintainability.
+- Did not create additional profile data files for creators whose details were unavailable in the provided dataset.
+
+---
+
+## Future Improvements
+
+Potential future enhancements include:
+
+- Add automated tests using Vitest and React Testing Library
+- Improve accessibility further with additional ARIA support
+- Add drag-and-drop reordering for selected profiles
+- Add micro-interactions and animations
+- Support API-based data loading instead of static JSON files
+- Improve mobile experience further
+
+---
 
 ## Getting Started
 
+Clone the repository:
+
+```bash
+git clone https://github.com/jash1734/wobb-intern-assignment
+```
+
+Install dependencies:
+
 ```bash
 npm install
+```
+
+Start the development server:
+
+```bash
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) to view the app.
+Run lint checks:
 
-## What's Included
+```bash
+npm run lint
+```
 
-- **Search / Dashboard** — filter influencers by platform (Instagram, YouTube, TikTok) and search by username or full name
-- **Profile Details** — click a profile to view extended data loaded from individual JSON files
-- **Routing** — `react-router-dom` with `/` (search) and `/profile/:username` (details)
+Build for production:
 
-Sample data lives in:
+```bash
+npm run build
+```
 
-- `src/assets/data/search/` — platform search results (10 profiles each)
-- `src/assets/data/profiles/` — detailed profile JSON per username
+Preview the production build:
 
-## How to Submit
+```bash
+npm run preview
+```
 
-1. **Download or clone** this starter project to your machine.
-2. **Create a new repository** on your own GitHub account. Do not fork the original assignment repo — push your work to a repo you own.
-3. Complete the tasks below and push your changes to that repository.
-4. **Share the public GitHub repository URL** with us as your submission.
+---
 
-### Deadline (strict)
+## Project Structure
 
-- **Due:** **2 July 2026, 2:00 PM IST** (Indian Standard Time, UTC+5:30)
-- **Any git commits made after this deadline will disqualify your submission.** We will only consider the repository state as of the deadline; late commits will not be reviewed.
-- Make sure your final work is pushed **before** the cutoff.
+```text
+src
+├── assets
+│   └── data
+├── components
+├── pages
+├── store
+├── types
+└── utils
+```
 
-## AI Usage
+---
 
-You may use any AI tools (Cursor, ChatGPT, Claude, GitHub Copilot, etc.). We are evaluating your final solution and engineering decisions.
+## Submission Checklist
 
-## Your Tasks
+- ✅ Application builds successfully using `npm run build`
+- ✅ Application runs without errors
+- ✅ Responsive UI improvements
+- ✅ Zustand-based state management
+- ✅ Persistent selected profiles
+- ✅ Meaningful Git history
+- ✅ Public GitHub repository
+- ✅ Deployment support
 
-Complete the following as part of your submission:
-
-1. **Find and fix all bugs and quality issues** — the codebase contains intentional bugs and quality issues. Identify and resolve them.
-
-2. **Completely redesign the UI/UX** — replace the basic layout with a polished, modern interface. Focus on usability, visual hierarchy, and delight.
-
-3. **Replace React Context with Zustand** — when you implement state management for the selected list, use [Zustand](https://github.com/pmndrs/zustand) instead of React Context.
-
-4. **Implement "Select profile & Add to List"** — the disabled "Add to List" button is a stub. Build the full feature:
-   - Select / add profiles to a persistent list
-   - View and manage the selected list
-   - Handle duplicates appropriately
-
-5. **Improve code quality and project structure** — refactor as needed, add proper types, and follow React best practices.
-
-6. **Optimize performance** — apply sensible optimizations where appropriate.
-
-7. **Use any libraries you need** — you are not limited to the current stack. Choose tools that help you deliver a great result (UI kits, state managers, testing libraries, etc.).
-
-## Scripts
-
-| Command        | Description              |
-| -------------- | ------------------------ |
-| `npm run dev`  | Start development server |
-| `npm run build`| Production build         |
-| `npm run lint` | Run ESLint               |
-
-## Submission Notes
-
-- Document any assumptions or trade-offs in your README
-- Ensure `npm run build` passes before submitting
-- Focus on demonstrating your judgment — not every possible feature needs to be built, but the core assignment items should be addressed thoughtfully
-- Double-check that your repo is public (or that we have access) and that the link is included in your submission
-- Please make meaningful commits throughout your work. We may review your commit history.
-- **Bonus:** Deploying the app (e.g. Vercel, Netlify, GitHub Pages) is optional but will be considered a plus — include the live URL in your submission if you do
-
-Good luck!
+---
