@@ -32,8 +32,6 @@ const selectedProfiles = useSelectedProfilesStore(
   useEffect(() => {
   if (!username) return;
 
-  setLoaded(false);
-
   loadProfileByUsername(username).then((data) => {
     setProfileData(data);
     setLoaded(true);
