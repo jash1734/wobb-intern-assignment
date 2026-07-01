@@ -1,24 +1,34 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import type { Platform } from "@/types";
 import { Layout } from "@/components/Layout";
 import { PlatformFilter } from "@/components/PlatformFilter";
 import { ProfileList } from "@/components/ProfileList";
 import { extractProfiles, filterProfiles } from "@/utils/dataHelpers";
 import { SelectedProfiles } from "@/components/SelectedProfiles";
+import { useMemo } from "react";
 
 export function SearchPage() {
   const [platform, setPlatform] = useState<Platform>("instagram");
   const [searchQuery, setSearchQuery] = useState("");
-  const [clickCount, setClickCount] = useState(0);
+  
+const allProfiles = useMemo(
+  () => extractProfiles(platform),
+  [platform]
+);
 
-  const allProfiles = extractProfiles(platform);
-  const filtered = filterProfiles(allProfiles, searchQuery);
+const filtered = useMemo(
+  () => filterProfiles(allProfiles, searchQuery),
+  [allProfiles, searchQuery]
+);
 
-  const handleProfileClick = (username: string) => {
-    setClickCount(clickCount + 1);
-    console.log("Clicked profile:", username, "total clicks:", clickCount);
-  };
-
+const handlePlatformChange = useCallback(
+  (p: Platform) => {
+    setPlatform(p);
+    setSearchQuery("");
+  },
+  []
+);
+ 
   return (
     <Layout title="Find Influencers">
       <div className="max-w-5xl mx-auto">
@@ -28,10 +38,7 @@ export function SearchPage() {
       <SelectedProfiles />
       <PlatformFilter
         selected={platform}
-        onChange={(p) => {
-          setPlatform(p);
-          setSearchQuery("");
-        }}
+        onChange={handlePlatformChange}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
       />
@@ -44,7 +51,7 @@ export function SearchPage() {
         profiles={filtered}
         platform={platform}
         searchQuery={searchQuery}
-        onProfileClick={handleProfileClick}
+        
       />
       </div>
     </Layout>

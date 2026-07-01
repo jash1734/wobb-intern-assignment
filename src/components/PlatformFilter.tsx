@@ -1,12 +1,22 @@
 import type { Platform } from "@/types";
 import { PLATFORMS, getPlatformLabel } from "@/utils/dataHelpers";
-
+import {
+  FaInstagram,
+  FaYoutube,
+  FaTiktok
+} from "react-icons/fa";
 interface PlatformFilterProps {
   selected: Platform;
   onChange: (platform: Platform) => void;
   searchQuery: string;
   onSearchChange: (value: string) => void;
 }
+
+const platformIcons = {
+  instagram: <FaInstagram size={18} />,
+  youtube: <FaYoutube size={18} />,
+  tiktok: <FaTiktok size={18} />,
+};
 
 export function PlatformFilter({
   selected,
@@ -28,7 +38,10 @@ export function PlatformFilter({
     : "bg-slate-800 text-slate-300 hover:bg-slate-700"
 }`}
           >
-            {getPlatformLabel(p)}
+            <label className="flex items-center gap-2 cursor-pointer">
+              {platformIcons[p]}
+              {getPlatformLabel(p)}
+            </label>
           </button>
         ))}
       </div>
